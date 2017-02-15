@@ -1,0 +1,9 @@
+canvas { background: #eee; display: block; margin: 0 auto 20px auto; padding: 0; }
+body * {
+    text-align: center;
+    font-family: "courier new";
+}
+
+ul li {
+    list-style: none;
+}
