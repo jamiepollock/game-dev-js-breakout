@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <title>Breakout Game: Pure Javascript</title>
@@ -13,18 +14,20 @@
 </head>
 
 <body>
-    <canvas id="myCanvas" width="480" height="320"></canvas>
-    <div class="mobile-controls">
-        <button onclick="togglePauseGame();">Pause / Unpause</button><button onclick="restartGame();">Restart Game</button><button
-            onclick="toggleAudio();">Toggle Audio</button>
+    <div class="container">
+        <canvas id="myCanvas" width="480" height="320"></canvas>
+        <div class="mobile-controls">
+            <button onclick="togglePauseGame();">Pause / Unpause</button><button onclick="restartGame();">Restart Game</button><button
+                onclick="toggleAudio();">Toggle Audio</button>
+        </div>
+        <h1>Breakout!</h1>
+        <p>Move the paddle left & right with any of the following; touch controls, your mouse or arrow keys</p>
+        <h2>Additional Keyboard controls</h2>
+        <p>Press "R" to restart the current game.</p>
+        <p>Press "S" to toggle sound effects.</p>
+        <p>Press "Space Bar" to pause/unpause game.</p>
+        <p><a href="https://github.com/jamiepollock/game-dev-js-breakout/">View the source & credits</a></p>
     </div>
-    <h1>Breakout!</h1>
-    <p>Move the paddle left & right with any of the following; touch controls, your mouse or arrow keys</p>
-    <h2>Additional Keyboard controls</h2>
-    <p>Press "R" to restart the current game.</p>
-    <p>Press "S" to toggle sound effects.</p>
-    <p>Press "Space Bar" to pause/unpause game.</p>
-    <p><a href="https://github.com/jamiepollock/game-dev-js-breakout/">View the source & credits</a></p>
     <script type="text/javascript" src="app.js"></script>
 </body>
 

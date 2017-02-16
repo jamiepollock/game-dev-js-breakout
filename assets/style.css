@@ -7,11 +7,16 @@ body * {
     font-family: "courier new";
 }
 
+.container {
+    max-width: 480px;
+    margin: 0 auto;
+}
+
 canvas {
     background: #eee;
     display: block;
-    margin: 0 auto 20px auto;
     padding: 0;
+    width: 100%;
 }
 
 ul li {
@@ -19,8 +24,8 @@ ul li {
 }
 
 .mobile-controls {
-    width: 480px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 20px auto 0 auto;
 }
 .mobile-controls button {
     padding: 10px 0;
