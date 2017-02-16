@@ -321,7 +321,7 @@ function toggleAudio() {
         document.addEventListener("keydown", keyDownHandler, false);
         document.addEventListener("keyup", keyUpHandler, false);
         document.addEventListener("mousemove", mouseMoveHandler, false);
-        document.addEventListener("touchmove", touchMoveHandler, false);
+        document.addEventListener("touchmove", touchMoveHandler, {passive: false, capture: false});
     }
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
