@@ -12,10 +12,10 @@ var ballColour = "#0095DD";
 
 var paddleHeight = 10;
 var paddleWidth = 75;
-var paddleX = (canvas.clientWidth - paddleWidth) / 2;
-var paddleY = (canvas.clientHeight - paddleHeight) - 10;
+var paddleX = (canvas.width - paddleWidth) / 2;
+var paddleY = (canvas.height - paddleHeight) - 10;
 
-var ballX = canvas.clientWidth / 2;
+var ballX = canvas.width / 2;
 var ballY = paddleY - (ballRadius * 2);
 
 var rightPressed = false;
@@ -113,13 +113,13 @@ function touchMoveHandler(e) {
 
 function movePaddleByClientX(clientX) {
     var relativeX = clientX - canvas.offsetLeft;
-    if (relativeX > 0 && (relativeX + (paddleWidth / 2)) < canvas.clientWidth) {
+    if (relativeX > 0 && (relativeX + (paddleWidth / 2)) < canvas.width) {
         var newX = relativeX - paddleWidth / 2;
 
         if (newX <= 0) {
             paddleX = 0;
-        } else if (newX >= canvas.clientWidth) {
-            paddleX = canvas.clientWidth;
+        } else if (newX >= canvas.width) {
+            paddleX = canvas.width;
         } else {
             paddleX = newX;
         }
@@ -163,7 +163,7 @@ function brickCollisionDetection() {
 }
 
 function wallCollisionDetection() {
-    if (ballX + dx > canvas.clientWidth - ballRadius || ballX + dx < ballRadius) {
+    if (ballX + dx > canvas.width - ballRadius || ballX + dx < ballRadius) {
         dx = -dx;
     }
 
@@ -188,11 +188,11 @@ function wallCollisionDetection() {
                 if (playSound) {
                     lifeLostSound.play();
                 }
-                ballX = canvas.clientWidth / 2;
-                ballY = canvas.clientHeight - 30;
+                ballX = canvas.width / 2;
+                ballY = canvas.height - 30;
                 dx = 2;
                 dy = -2;
-                paddleX = (canvas.clientWidth - paddleWidth) / 2;
+                paddleX = (canvas.width - paddleWidth) / 2;
             }
         }
     }
@@ -258,7 +258,7 @@ function drawLives() {
     ctx.font = "16px Courier New";
     ctx.fillStyle = "#0095DD";
     ctx.textAlign = "right";
-    ctx.fillText("Lives: " + lives, canvas.clientWidth - 10, 20);
+    ctx.fillText("Lives: " + lives, canvas.width - 10, 20);
     ctx.closePath();
 }
 
@@ -269,13 +269,13 @@ function drawSoundState() {
     ctx.font = "16px Courier New";
     ctx.fillStyle = "#0095DD";
     ctx.textAlign = "center";
-    ctx.fillText("Sound: " + state, canvas.clientWidth / 2, 20);
+    ctx.fillText("Sound: " + state, canvas.width / 2, 20);
     ctx.closePath();
 }
 
 function drawOverlay(text) {
     ctx.beginPath();
-    ctx.rect(0, 0, canvas.clientWidth, canvas.clientHeight);
+    ctx.rect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "rgba(0,0,0,.2)";
     ctx.fill();
     ctx.closePath();
@@ -284,13 +284,13 @@ function drawOverlay(text) {
     ctx.font = "30px Courier New";
     ctx.fillStyle = "black";
     ctx.textAlign = "center";
-    ctx.fillText(text, canvas.clientWidth / 2, canvas.clientHeight / 2);
+    ctx.fillText(text, canvas.width / 2, canvas.height / 2);
     ctx.closePath();
 }
 
 
 function movePaddle() {
-    if (rightPressed && paddleX < canvas.clientWidth - paddleWidth) {
+    if (rightPressed && paddleX < canvas.width - paddleWidth) {
         paddleX += 7;
     }
     else if (leftPressed && paddleX > 0) {
@@ -324,7 +324,7 @@ function toggleAudio() {
         document.addEventListener("touchmove", touchMoveHandler, {passive: false, capture: false});
     }
     function draw() {
-        ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBricks();
         drawBall();
         drawPaddle();
