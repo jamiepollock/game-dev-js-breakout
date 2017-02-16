@@ -75,19 +75,13 @@ function keyDownHandler(e) {
         leftPressed = true;
     }
     else if (e.keyCode == 32) {
-        if (gameState === gameStates.active) {
-            gameState = gameStates.paused;
-        } else if (gameState === gameStates.paused) {
-            gameState = gameStates.active;
-        }
+        togglePauseGame();
     }
     else if (e.keyCode == 82) {
-        document.location.reload();
+        resetGame();
     }
     else if (e.keyCode == 83) {
-        if (gameState === gameStates.active || gameState === gameStates.paused) {
-            playSound = !playSound;
-        }
+        toggleAudio();
     }
 }
 function keyUpHandler(e) {
@@ -302,8 +296,23 @@ function movePaddle() {
     }
 }
 
-; (function () {
+function togglePauseGame() {
+    if (gameState === gameStates.active) {
+        gameState = gameStates.paused;
+    } else if (gameState === gameStates.paused) {
+        gameState = gameStates.active;
+    }
+}
 
+function restartGame() {
+    document.location.reload();
+}
+
+function toggleAudio() {
+    if (gameState === gameStates.active || gameState === gameStates.paused) {
+        playSound = !playSound;
+    }
+}
 
 ; (function () {
     function registerInputControls() {
