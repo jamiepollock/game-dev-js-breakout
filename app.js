@@ -34,10 +34,6 @@ var winSound = new sound("assets/sound-effects/win.mp3");
 
 var playSound = true;
 
-document.addEventListener("keydown", keyDownHandler, false);
-document.addEventListener("keyup", keyUpHandler, false);
-document.addEventListener("mousemove", mouseMoveHandler, false);
-
 var brickRowCount = 3;
 var brickColumnCount = 5;
 var brickWidth = 75;
@@ -104,17 +100,32 @@ function keyUpHandler(e) {
 }
 function mouseMoveHandler(e) {
     if (gameState === gameStates.active) {
-        var relativeX = e.clientX - canvas.offsetLeft;
-        if (relativeX > 0 && (relativeX + (paddleWidth / 2)) < canvas.width) {
-            var newX = relativeX - paddleWidth / 2;
+        movePaddleByClientX(e.clientX);
+    }
+}
 
-            if (newX <= 0) {
-                paddleX = 0;
-            } else if (newX >= canvas.width) {
-                paddleX = canvas.width;
-            } else {
-                paddleX = newX;
-            }
+function touchMoveHandler(e) {
+    if (gameState === gameStates.active) {
+        var touches = e.changedTouches;
+
+        for (var i = 0; i < touches.length; i++) {
+            var touch = touches[i];
+            movePaddleByClientX(touch.clientX);
+        }
+    }
+}
+
+function movePaddleByClientX(clientX) {
+    var relativeX = clientX - canvas.offsetLeft;
+    if (relativeX > 0 && (relativeX + (paddleWidth / 2)) < canvas.width) {
+        var newX = relativeX - paddleWidth / 2;
+
+        if (newX <= 0) {
+            paddleX = 0;
+        } else if (newX >= canvas.width) {
+            paddleX = canvas.width;
+        } else {
+            paddleX = newX;
         }
     }
 }
@@ -294,6 +305,13 @@ function movePaddle() {
 ; (function () {
 
 
+; (function () {
+    function registerInputControls() {
+        document.addEventListener("keydown", keyDownHandler, false);
+        document.addEventListener("keyup", keyUpHandler, false);
+        document.addEventListener("mousemove", mouseMoveHandler, false);
+        document.addEventListener("touchmove", touchMoveHandler, false);
+    }
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBricks();
@@ -325,6 +343,7 @@ function movePaddle() {
         requestAnimationFrame(draw);
     }
 
+    registerInputControls();
     draw();
 })();
 
