@@ -100,6 +100,8 @@ function mouseMoveHandler(e) {
 
 function touchMoveHandler(e) {
     if (gameState === gameStates.active) {
+        e.preventDefault();
+
         var touches = e.changedTouches;
 
         for (var i = 0; i < touches.length; i++) {
