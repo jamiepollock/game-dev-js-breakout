@@ -17,7 +17,6 @@ var paddleHeight = 10;
 var paddleWidth = 75;
 var paddleX = (canvas.width - paddleWidth) / 2;
 var paddleY = (canvas.height - paddleHeight) - 10;
-var paddleShielded = false;
 
 var rightPressed = false;
 var leftPressed = false;
@@ -101,9 +100,6 @@ function keyUpHandler(e) {
     }
     else if (e.keyCode == 37) {
         leftPressed = false;
-    }
-    else if (e.keyCode == 16) {
-        paddleShielded = false;
     }
 }
 function mouseMoveHandler(e) {
