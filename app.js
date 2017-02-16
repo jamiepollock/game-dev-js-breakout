@@ -4,8 +4,6 @@ var ctx = canvas.getContext("2d");
 var gameStates = { "active": 0, "paused": 1, "win": 2, "gameover": 3 };
 Object.freeze(gameStates);
 
-var x = canvas.width / 2;
-var y = canvas.height - 30;
 var dx = 2;
 var dy = -2;
 
@@ -16,6 +14,9 @@ var paddleHeight = 10;
 var paddleWidth = 75;
 var paddleX = (canvas.width - paddleWidth) / 2;
 var paddleY = (canvas.height - paddleHeight) - 10;
+
+var ballX = canvas.width / 2;
+var ballY = paddleY - (ballRadius * 2);
 
 var rightPressed = false;
 var leftPressed = false;
@@ -134,7 +135,7 @@ function brickCollisionDetection() {
             var b = bricks[column][row];
 
             if (b.status > 0) {
-                if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
+                if (ballX > b.x && ballX < b.x + brickWidth && ballY > b.y && ballY < b.y + brickHeight) {
                     dy = -dy;
                     b.status--;
 
@@ -160,14 +161,14 @@ function brickCollisionDetection() {
 }
 
 function wallCollisionDetection() {
-    if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+    if (ballX + dx > canvas.width - ballRadius || ballX + dx < ballRadius) {
         dx = -dx;
     }
 
-    if (y + dy < ballRadius) {
+    if (ballY + dy < ballRadius) {
         dy = -dy;
-    } else if (y + dy > paddleY - ballRadius) {
-        if (x > paddleX && x < paddleX + paddleWidth) {
+    } else if (ballY + dy > paddleY - ballRadius) {
+        if (ballX > paddleX && ballX < paddleX + paddleWidth) {
             dy = -dy;
             if (playSound) {
                 pointSound.play();
@@ -185,8 +186,8 @@ function wallCollisionDetection() {
                 if (playSound) {
                     lifeLostSound.play();
                 }
-                x = canvas.width / 2;
-                y = canvas.height - 30;
+                ballX = canvas.width / 2;
+                ballY = canvas.height - 30;
                 dx = 2;
                 dy = -2;
                 paddleX = (canvas.width - paddleWidth) / 2;
@@ -197,7 +198,7 @@ function wallCollisionDetection() {
 
 function drawBall() {
     ctx.beginPath();
-    ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+    ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
     ctx.fillStyle = ballColour;
     ctx.fill();
     ctx.closePath();
@@ -340,8 +341,8 @@ function toggleAudio() {
                 collisionDetection();
                 movePaddle();
 
-                x += dx;
-                y += dy;
+                ballX += dx;
+                ballY += dy;
         }
 
         drawSoundState();
